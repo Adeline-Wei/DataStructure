@@ -1,0 +1,504 @@
+  <!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <link rel="icon"1032 href="./favicon.ico">
+
+    <title>1032 資料結構教學網頁</title>
+
+    <!-- Bootstrap core CSS -->
+    <link href="./dist/css/bootstrap.min.css" rel="stylesheet">
+
+    <!-- Custom styles for this template -->
+    <link href="dashboard.css" rel="stylesheet">
+
+    <!-- Just for debugging purposes. Don't actually copy these 2 lines! -->
+    <!--[if lt IE 9]><script src="../../assets/js/ie8-responsive-file-warning.js"></script><![endif]-->
+
+    <script src="./assets/js/ie-emulation-modes-warning.js"></script>
+    <script type="text/javascript">
+
+      var selectedSidebar = "#sidebar-li-01";
+      var selectedTable = "#table-responsive-01";
+
+      function initialize() {
+        
+        $('#Contact').popover({trigger: 'click'});
+        $('#HWFormat').popover({trigger: 'click'});
+        $('#Others').popover({trigger: 'click'});
+
+        $('ul.nav.nav-sidebar>li').on('click', function(){
+          $(selectedTable).hide();
+          $(selectedSidebar).removeAttr('class');
+          $('.sub-header').empty();
+          $('.sub-header').append($(this).text());
+          var selectedLi = $(this).attr('id')[11]+$(this).attr('id')[12];
+          selectedSidebar = "#sidebar-li-"+selectedLi;
+          console.log(selectedSidebar);
+
+          if (selectedSidebar != "#sidebar-li-01")
+            $('.progress').hide();
+          else
+            $('.progress').show();
+
+          if (selectedSidebar == "#sidebar-li-08")
+            $('#table-responsive-08-2').show();
+          else
+            $('#table-responsive-08-2').hide();
+
+            
+          selectedTable = "#table-responsive-"+selectedLi;
+          $(selectedSidebar).addClass('active');
+          $(selectedTable).show();
+
+        });
+
+        $('.nav.navbar-nav.navbar-right').on('click', function(){
+          $(this).popover(); 
+        });
+
+        $('.pdf-title').on('click', function(){
+          var pdfName = $(this).text()+".pdf";
+          window.open(pdfName, "_blank", 'width=850,height=750');
+          //console.log(selectedPDF);
+        });
+
+        $('#sidebar-li-02').on('click', function(){
+          $('.table tbody tr').addClass('click-lecture');
+          $('.table tbody tr td').css('vertical-align', 'middle');
+        });
+        // Passing location to get results - End
+      };
+
+    </script>
+    <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
+    <!--[if lt IE 9]>
+      <script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
+      <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
+    <![endif]-->
+  </head>
+
+  <body onload="initialize()">
+
+    <nav class="navbar navbar-inverse navbar-fixed-top">
+      <div class="container-fluid">
+        <div class="navbar-header">
+          <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+            <span class="sr-only">Toggle navigation</span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </button>
+          <a class="navbar-brand" href="">1032 資料結構教學網頁</a>
+        </div>
+        <div id="navbar" class="navbar-collapse collapse">
+          <ul class="nav navbar-nav navbar-right">
+            <!-- <li><button type="button" class="btn btn-lg btn-danger" data-toggle="popover" title="Popover title" data-content="And here's some amazing content. It's very engaging. Right?" data-placement="bottom">Click to toggle popover</button></li> -->
+            <li><a href="#" id="Contact" data-html="true" data-container="body" data-toggle="popover" data-placement="bottom" data-content="林清池 教授 INS509<br>
+                     E-mail : lincc@mail.ntou.edu.tw<br><br>
+                     廖柏翰 研一 INS403 6638<br>
+                     詹燿鴻 研一 INS503 6607<br>
+                     林志忠 研二 INS503 6607<br>
+                     林琨祐 研二 INS405 6639">聯絡資訊</a></li>
+            <li><a href="#" id="HWFormat" data-html="true" data-container="body" data-toggle="popover" data-placement="bottom" data-content="請用<font color='red'> 雙面空白A4紙書寫</font><br>
+                     標明<font color='red'> HW# 姓名 學號</font><br>
+                     未依格式者，不予計分">作業格式</a></li>
+            <li><a href="#" id="Others" style="margin-right:100px" data-html="true" data-container="body" data-toggle="popover" data-placement="bottom" data-content="E-tutor網站：<br><a href='http://140.116.249.152/e-Tutor/'>http://140.116.249.152/e-Tutor/</a><br><br>
+              FB社團：<br><a href='https://www.facebook.com/groups/535912359860342/'>海大資料結構討論區</a><br><br>
+              資訊時事網頁：<br><a href='http://www.cs.ntou.edu.tw/information/'>http://www.cs.ntou.edu.tw/information/</a>">其他資訊</a></li>
+          </ul>
+          <!-- <form class="navbar-form navbar-right">
+            <input type="text" class="form-control" placeholder="Search...">
+          </form> -->
+        </div>
+      </div>
+    </nav>
+
+    <div class="container-fluid">
+      <div class="row">
+        <div class="col-sm-3 col-md-2 sidebar">
+          <ul class="nav nav-sidebar">
+            <!-- <li class="active" id="sidebar-li-1"><a href="#">課程公告<span class="sr-only">(current)</span></a></li> -->
+            <li class="active" id="sidebar-li-01"><a href="#">課程公告</a></li>
+            <li id="sidebar-li-02"><a href="#">正課講義</a></li>
+            <li id="sidebar-li-03"><a href="#">程式作業</a></li>
+            <li id="sidebar-li-04"><a href="#">紙本作業</a></li>
+            <li id="sidebar-li-05"><a href="#">課堂發問</a></li>
+            <li id="sidebar-li-06"><a href="#">正課缺席</a></li>
+            <li id="sidebar-li-07"><a href="#">實習缺席</a></li>
+            <li id="sidebar-li-08"><a href="#">成績查詢</a></li>
+            <li id="sidebar-li-09"><a href="#">歷屆考題</a></li>
+            <li id="sidebar-li-10"><a href="#">實習座位</a></li>
+          </ul>
+        </div>
+        <div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">
+          <!-- <h1 class="page-header">Dashboard</h1>
+
+          <div class="row placeholders">
+            <div class="col-xs-6 col-sm-3 placeholder">
+              <img data-src="holder.js/200x200/auto/sky" class="img-responsive" alt="Generic placeholder thumbnail">
+              <h4>Label</h4>
+              <span class="text-muted">Something else</span>
+            </div>
+            <div class="col-xs-6 col-sm-3 placeholder">
+              <img data-src="holder.js/200x200/auto/vine" class="img-responsive" alt="Generic placeholder thumbnail">
+              <h4>Label</h4>
+              <span class="text-muted">Something else</span>
+            </div>
+            <div class="col-xs-6 col-sm-3 placeholder">
+              <img data-src="holder.js/200x200/auto/sky" class="img-responsive" alt="Generic placeholder thumbnail">
+              <h4>Label</h4>
+              <span class="text-muted">Something else</span>
+            </div>
+            <div class="col-xs-6 col-sm-3 placeholder">
+              <img data-src="holder.js/200x200/auto/vine" class="img-responsive" alt="Generic placeholder thumbnail">
+              <h4>Label</h4>
+              <span class="text-muted">Something else</span>
+            </div>
+          </div> -->
+
+          <h2 class="sub-header">課程公告</h2>
+          <div class="progress">
+            <div class="progress-bar progress-bar-striped active" role="progressbar" aria-valuenow="60" aria-valuemin="0" aria-valuemax="100" style="width: 60%;">
+            60%
+            </div>
+            距離期中考還有...30天
+          </div>
+          <div class="table-responsive">
+            <table class="table table-striped" id="table-responsive-01">
+              <thead>
+                <tr>
+                  <th style="text-align:center;font-size:20px;width:30%">時間</th>
+                  <th style="text-align:center;font-size:20px;width:70%">事由</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td class="bulletin-date">2014/05/16</td>
+                  <td>資料結構期末考教室如下<br>
+                      時間：6/18(三)13:00~16:00<br>
+                      地點：b14、b16<br>
+                      範圍：第四、五、六章<br>
+                      可攜帶 2 分之 1 A4大小的筆記</td>
+                </tr>
+                <tr>
+                  <td class="bulletin-date">2014/04/30</td>
+                  <td>前半學期成績 (50%)<br>
+                      計分方式為: 手寫作業(5%) + 程式分數(15%) + 小考(10%) + 期中考(30%)<br>
+                      程式分數 ＝ 實習分數 * (答題數 / 5)</td>
+                </tr>
+                <tr>
+                  <td class="bulletin-date">2014/04/09</td>
+                  <td>海大資料結構討論區 已建立，實習題目有任何問題歡迎在此提出，請妥善運用！</td>
+                </tr>
+                <tr>
+                  <td class="bulletin-date">2014/04/08</td>
+                  <td>期中考注意事項<br>
+                      時間：4/16(三) PM 1:10~4:00<br>
+                      範圍：老師教過的部分<br>
+                      地點：系館B14、B16<br>
+                      可攜帶 2 分之 1 A4大小的筆記</td>
+                </tr>
+                <tr>
+                  <td class="bulletin-date">2014/04/07</td>
+                  <td>1. 下週 4/18 (五) 期中考週，實習課不用上課。<br>
+                      2. <font color="red">下下週 4/25(五) 線上期中考，有修課(正課、實習課)的同學皆須參加。</font><br>
+                         &nbsp;&nbsp;&nbsp;&nbsp;範圍：Week01到Week08的所有練習題。</td>
+                </tr>
+              </tbody>
+            </table>
+            <table class="table table-striped" id="table-responsive-02" style="display:none;">
+              <thead>
+                <tr>
+                  <th class="title-font">章節名稱</th>
+                  <th class="title-font">檔案下載</th>
+                  <th class="title-font">列印格式</th>
+                  <th class="title-font">筆記版本</th>
+                  <th class="title-font">上傳日期</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td>Syllabus</td>
+                  <td><a href="#" class="pdf-title">Syllabus</a></td>
+                  <td><a href="#" class="pdf-title">Syllabus-4</a></td>
+                  <td>NULL</td>
+                  <td>2014/02/20</td>
+                </tr>
+                <tr>
+                  <td>E-tutor</td>
+                  <td><a href="#" class="pdf-title">E-tutor</a></td>
+                  <td><a href="#" class="pdf-title">E-tutor-4</a></td>
+                  <td>NULL</td>
+                  <td>2014/02/20</td>
+                </tr>
+                <tr>
+                  <td>Ch1 Basis Concepts</td>
+                  <td><a href="#" class="pdf-title">Ch1 Basis Concepts</a></td>
+                  <td><a href="#" class="pdf-title">Ch1 Basis Concepts-4</a></td>
+                  <td><a href="#" class="pdf-title">Ch1 Basis Concepts</a></td>
+                  <td>2014/02/20</td>
+                </tr>
+                <tr>
+                  <td>Ch2 Arrays and Structures</td>
+                  <td><a href="#" class="pdf-title">Ch2 Arrays and Structures</a></td>
+                  <td><a href="#" class="pdf-title">Ch2 Arrays and Structures-4</a></td>
+                  <td><a href="#" class="pdf-title">Ch2 Arrays and Structures</a></td>
+                  <td>2014/02/20</td>
+                </tr>
+                <tr>
+                  <td>Ch3 Stacks and Queues</td>
+                  <td><a href="#" class="pdf-title">Ch3 Stacks and Queues</a></td>
+                  <td><a href="#" class="pdf-title">Ch3 Stacks and Queues-4</a></td>
+                  <td><a href="#" class="pdf-title">Ch3 Stacks and Queues</a></td>
+                  <td>2014/02/20</td>
+                </tr>
+                <tr>
+                  <td>Ch4 Linked Lists</td>
+                  <td><a href="#" class="pdf-title">Ch4 Linked Lists</a></td>
+                  <td><a href="#" class="pdf-title">Ch4 Linked Lists-4</a></td>
+                  <td><a href="#" class="pdf-title">Ch4 Linked Lists</a></td>
+                  <td>2014/02/20</td>
+                </tr>
+                <tr>
+                  <td>Ch5 Trees</td>
+                  <td><a href="#" class="pdf-title">Ch5 Trees</a></td>
+                  <td><a href="#" class="pdf-title">Ch5 Trees-4</a></td>
+                  <td><a href="#" class="pdf-title">Ch5 Trees</a></td>
+                  <td>2014/02/20</td>
+                </tr>
+                <tr>
+                  <td>Ch6 Graphs</td>
+                  <td><a href="#" class="pdf-title">Ch6 Graphs</a></td>
+                  <td><a href="#" class="pdf-title">Ch6 Graphs-4</a></td>
+                  <td><a href="#" class="pdf-title">Ch6 Graphs</a></td>
+                  <td>2014/02/20</td>
+                </tr>
+              </tbody>
+            </table>
+            <table class="table table-striped" id="table-responsive-03" style="display:none;">
+              <thead>
+                <tr>
+                  <th class="title-font">章節題目</th>
+                  <th class="title-font">題目連結</th>
+                  <th class="title-font">繳交期限</th>
+                  <th class="title-font">上傳日期</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td>第1週 (02/21)</td>
+                  <td><a href="#" class="pdf-title">練習一：計算總和、乘積、差、商和餘數</a><br>
+                      <a href="#" class="pdf-title">練習二：質因數分解</a><br>
+                      <a href="#" class="pdf-title">練習三：參數傳遞 - 泡沫排序法</a><br>
+                      <a href="#" class="pdf-title">加分題：救救好人吧 [中]</a><br>
+                      <a href="#" class="pdf-title">加分題：交集法 [中]</a></td>
+                  <td>2014/03/07</td>
+                  <td>2014/02/19</td>
+                </tr>
+                <tr>
+                  <td>第2週 (02/27)</td>
+                  <td><a href="#" class="pdf-title">練習一：二元搜尋法</a><br>
+                      <a href="#" class="pdf-title">練習二：選擇排序法</a><br>
+                      <a href="#" class="pdf-title">練習三：河內塔遊戲</a><br>
+                      <a href="#" class="pdf-title">加分題：河內塔遊戲 (非遞迴) [中]</a><br>
+                      <a href="#" class="pdf-title">加分題：雙色河內塔 [中]</a></td>
+                  <td>2014/03/14</td>
+                  <td>2014/02/25</td>
+                </tr>
+                <tr>
+                  <td>第3週 (03/06)</td>
+                  <td><a href="#" class="pdf-title">練習一：計算時間</a><br>
+                      <a href="#" class="pdf-title">練習二：插入排序法</a><br>
+                      <a href="#" class="pdf-title">練習三：多項式加法</a><br>
+                      <a href="#" class="pdf-title">加分題：Shell sort [中]</a><br>
+                      <a href="#" class="pdf-title">加分題：分禮物 [中]</a></td>
+                  <td>2014/03/21</td>
+                  <td>2014/03/04</td>
+                </tr>
+                <tr>
+                  <td>第4週 (03/13)</td>
+                  <td><a href="#" class="pdf-title">練習一：解讀神秘密碼</a><br>
+                      <a href="#" class="pdf-title">練習二：成績統計</a><br>
+                      <a href="#" class="pdf-title">練習三：多項式乘法</a><br>
+                      <a href="#" class="pdf-title">加分題：迴文判別 [中]</a><br>
+                      <a href="#" class="pdf-title">加分題：字串拼圖 [中]</a></td>
+                  <td>2014/03/28</td>
+                  <td>2014/03/11</td>
+                </tr>
+                <tr>
+                  <td>第5週 (03/20)</td>
+                  <td><a href="#" class="pdf-title">練習一：矩陣轉置_演算法(一)</a><br>
+                      <a href="#" class="pdf-title">練習二：矩陣轉置_演算法(二)</a><br>
+                      <a href="#" class="pdf-title">練習三：矩陣轉置_演算法(三)</a><br>
+                      <a href="#" class="pdf-title">加分題：天堂島居留證 [中]</a><br>
+                      <a href="#" class="pdf-title">加分題：調皮的貓咪 [中]</a></td>
+                  <td>2014/03/28</td>
+                  <td>2014/03/11</td>
+                </tr>
+              </tbody>
+            </table>
+            <table class="table table-striped" id="table-responsive-04" style="display:none;">
+              <thead>
+                <tr>
+                  <th class="title-font">週次</th>
+                  <th class="title-font">作業</th>
+                  <th class="title-font">解答</th>
+                  <th class="title-font">上傳日期</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td>1</td>
+                  <td><a href="#" class="pdf-title">Homework 1</a></td>
+                  <td><a href="#" class="pdf-title">Ans1</a></td>
+                  <td>2014/02/24</td>
+                </tr>
+                <tr>
+                  <td>2</td>
+                  <td><a href="#" class="pdf-title">Homework 2</a></td>
+                  <td><a href="#" class="pdf-title">Ans2</a></td>
+                  <td>2014/03/06</td>
+                </tr>
+                <tr>
+                  <td>3</td>
+                  <td><a href="#" class="pdf-title">Homework 3</a></td>
+                  <td><a href="#" class="pdf-title">Ans3</a></td>
+                  <td>2014/03/17</td>
+                </tr>
+                <tr>
+                  <td>4</td>
+                  <td><a href="#" class="pdf-title">Homework 4</a></td>
+                  <td><a href="#" class="pdf-title">Ans4</a></td>
+                  <td>2014/03/17</td>
+                </tr>
+                <tr>
+                  <td>5</td>
+                  <td><a href="#" class="pdf-title">Homework 5</a></td>
+                  <td><a href="#" class="pdf-title">Ans5</a></td>
+                  <td>2014/03/28</td>
+                </tr>
+                <tr>
+                  <td>6</td>
+                  <td><a href="#" class="pdf-title">Homework 6</a></td>
+                  <td><a href="#" class="pdf-title">Ans6</a></td>
+                  <td>2014/04/07</td>
+                </tr>
+                <tr>
+                  <td>7</td>
+                  <td><a href="#" class="pdf-title">Homework 7</a></td>
+                  <td><a href="#" class="pdf-title">Ans7</a></td>
+                  <td>2014/05/03</td>
+                </tr>
+                <tr>
+                  <td>8</td>
+                  <td><a href="#" class="pdf-title">Homework 8</a></td>
+                  <td><a href="#" class="pdf-title">Ans8</a></td>
+                  <td>2014/05/12</td>
+                </tr>
+                <tr>
+                  <td>9</td>
+                  <td><a href="#" class="pdf-title">Homework 9</a></td>
+                  <td><a href="#" class="pdf-title">Ans9</a></td>
+                  <td>2014/05/26</td>
+                </tr>
+                <tr>
+                  <td>10</td>
+                  <td><a href="#" class="pdf-title">Homework 10</a></td>
+                  <td><a href="#" class="pdf-title">Ans10</a></td>
+                  <td>2014/06/07</td>
+                </tr>
+              </tbody>
+            </table>
+            <table class="table table-striped" id="table-responsive-08" style="display:none;">
+              <thead>
+                <tr>
+                  <th colspan="2" class="title-font">正課 成績列表</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td>正課作業繳交情形</td>
+                  <td><a href="#" class="pdf-title">link</a></td>
+                </tr>
+                <tr>
+                  <td>第一次小考</td>
+                  <td><a href="#" class="pdf-title">link</a></td>
+                </tr>
+                <tr>
+                  <td>期中考</td>
+                  <td><a href="#" class="pdf-title">link</a></td>
+                </tr>
+                <tr>
+                  <td>第二次小考</td>
+                  <td><a href="#" class="pdf-title">link</a></td>
+                </tr>
+              </tbody>
+            </table>
+            <table class="table table-striped" id="table-responsive-08-2" style="display:none;">
+              <thead>
+                <tr>
+                  <th colspan="2" class="title-font">實習 成續列表</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td>歷次習題繳交情形</td>
+                  <td><a href="#" class="pdf-title">link</a></td>
+                </tr>
+              </tbody>
+            </table>
+            <table class="table table-striped" id="table-responsive-09" style="display:none;">
+              <thead>
+                <tr>
+                  <th class="title-font">考試名稱與範圍</th>
+                  <th class="title-font">檔案下載</th>
+                  <th class="title-font">上傳日期</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td>2011期中考</td>
+                  <td><a href="#" class="pdf-title">2011期中考</a></td>
+                  <td>2014/04/08</td>
+                </tr>
+                <tr>
+                  <td>2011期末考</td>
+                  <td><a href="#" class="pdf-title">2011期末考</a></td>
+                  <td>2014/04/08</td>
+                </tr>
+                <tr>
+                  <td>2012期中考</td>
+                  <td><a href="#" class="pdf-title">2012期中考</a></td>
+                  <td>2014/04/08</td>
+                </tr>
+                <tr>
+                  <td>2012期末考</td>
+                  <td><a href="#" class="pdf-title">2012期末考</a></td>
+                  <td>2014/04/08</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+          <div id="table-responsive-10" style="display:none;">
+            <object data="資料結構實習座位表.pdf" type="application/pdf" width="100%" height="650"></object>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Bootstrap core JavaScript
+    ================================================== -->
+    <!-- Placed at the end of the document so the pages load faster -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+    <script src="./dist/js/bootstrap.min.js"></script>
+    <script src="./assets/js/docs.min.js"></script>
+    <!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
+    <script src="./assets/js/ie10-viewport-bug-workaround.js"></script>
+  </body>
+</html>
+
